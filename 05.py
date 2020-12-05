@@ -15,12 +15,12 @@ data = f.read().split('\n')[:-1] # drop last empty row
 def to_bin(line):
     
     row = []
-    for l in line[:-3]:
-        row.append('0') if l == 'F' else row.append('1')
-    
     col = []
-    for l in line[-3:]:
-        col.append('0') if l == 'L' else col.append('1')
+    for n, l in enumerate(line):
+        if n < 7:
+            row.append('0') if l == 'F' else row.append('1')
+        else:
+            col.append('0') if l == 'L' else col.append('1')
         
     return ''.join(row), ''.join(col)
 
@@ -37,4 +37,3 @@ result = np.sort(result)
 missing = np.argmax(np.diff(result))
 
 print(result[missing] + 1) # seat is next missing one
-
