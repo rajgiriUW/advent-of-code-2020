@@ -73,12 +73,12 @@ while values != values_pre:
 print(values)
 
 # Part 2
-def bag_has_rec(color, n = 1):
+def bag_has_rec(color):
 
     values= 1
     for cl, val in bag_has(color).to_dict().items():
-        values += val * bag_has_rec(cl, val)
+        values += val * bag_has_rec(cl)
             
-    return values       
+    return values           
     
 print(bag_has_rec('shiny gold') - 1) # subtract the bag itself
