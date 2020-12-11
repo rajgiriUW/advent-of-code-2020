@@ -25,23 +25,19 @@ seats = np.pad(seats, 1, 'constant', constant_values = 0) # add boundaries
 def seat_state(seats, r, c):
     
     if seats[r][c] == np.nan:
-        
         return np.nan
     
     elif seats[r][c] == 1:
-        
         return np.nansum(seats[r-1:r+2, c-1:c+2]) - seats[r][c] < 4
             
     elif seats[r][c] == 0:
-        
         return np.nansum(seats[r-1:r+2, c-1:c+2]) - seats[r][c] == 0
 
 def find_seats(seats):
     
     num_occ = 0
     num_occ_pre = -1
-    rows = seats.shape[0]
-    cols = seats.shape[1]
+    rows, cols = seats.shape
     
     while num_occ != num_occ_pre:
         
