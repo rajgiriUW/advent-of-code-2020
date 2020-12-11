@@ -21,7 +21,6 @@ for n, s in enumerate(_seats):
     seats[n][seats[n] == 2] = np.nan
 
 seats = np.pad(seats, 1, 'constant', constant_values = 0) # add boundaries
-seats2 = np.copy(seats)
 
 def seat_state(seats, r, c):
     
@@ -60,37 +59,31 @@ def find_seats(seats):
 print(find_seats(seats))
     
 # Part 2
-seats = np.copy(seats)
-
 def non_floor(seats, r, c, vector):
     ''' vector = [x, y] e.g. [-1, -1] = down-left direction'''
     delx, dely = vector
     
     if delx == 0: #vertical
         arr = seats[r+dely::dely, c]
-        return arr[np.where(np.isfinite(arr))][0]
         
     elif dely == 0: #horizontal
         arr = seats[r, c+delx::delx]
-        return arr[np.where(np.isfinite(arr))][0]
     
     else:
         arr = np.diag(seats[r+dely::dely, c+delx::delx])
-        return arr[np.where(np.isfinite(arr))][0]
+    
+    return arr[np.where(np.isfinite(arr))][0]
     
 vectors = [(-1, -1), (-1, 0), (-1, 1), (0, 1), (1, 1), (1, 0), (1, -1), (0, -1)]
 def seat_state(seats, r, c):
     
     if seats[r][c] == np.nan:
-        
         return np.nan
     
     elif seats[r][c] == 1:
-        
         return sum([non_floor(seats, r, c, v) for v in vectors]) < 5
             
     elif seats[r][c] == 0:
-        
         return sum([non_floor(seats, r, c, v) for v in vectors]) == 0
 
 print(find_seats(seats))
