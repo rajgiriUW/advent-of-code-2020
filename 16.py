@@ -5,6 +5,9 @@ Created on Thu Dec 17 18:01:46 2020
 @author: raj
 """
 import numpy as np
+from functools import reduce
+from operator import mul
+
 base = r'C:/Users/Raj/OneDrive/UW Work/Coding and Signal Processing Work/Python/aoc_2020/'
 f = open(base + r'/16_train.txt')
 data = f.read().split('\n\n')
@@ -96,9 +99,5 @@ for d in locsd.keys():
         dep_keys.append(d)
 
 # Answer the damn question
-yours_dep = 1
-for d in dep_keys:
-    
-    yours_dep *= yours[locsd[d]]
-
-print(yours_dep)
+yours_dep = [yours[locsd[d]] for d in dep_keys]
+print(reduce(mul, yours_dep))
