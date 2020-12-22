@@ -5,6 +5,8 @@ Created on Mon Dec 21 10:17:02 2020
 @author: Raj
 """
 
+# NOTE ONLY UP TO PART 1 :( :( :(
+
 import numpy as np
 from operator import mul
 from functools import reduce
